@@ -32,5 +32,15 @@ app.post('./api/notes', function(req, res) {
     });
 });
 
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
+app.use(express.urlencoded({extended: true}));
+app.use(expres.json());
+app.use(express.static('public'));
+
+app.listen(PORT, function() {
+    console.log(`listening on PORT: ${PORT}`);
+});
 
