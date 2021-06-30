@@ -19,3 +19,18 @@ app.get('./db/db.json', function(err, data) {
     });
 });
 
+app.post('./api/notes', function(req, res) {
+    fs.readFile('./db/db.json', function(err, data) {
+        console.log(data);
+        const addNote = req.body;
+        addNote.id = uuidv4();
+        const note = JSON.parse(data);
+        note.push(addNote);
+        fs.writeFile('.db/db.json', JSON.stringify(note), function() {
+            res.send(addNote);
+        });
+    });
+});
+
+
+
